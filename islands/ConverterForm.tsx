@@ -5,7 +5,13 @@ import supportedCurrencies from '../supported-currencies.json' assert { type: 'j
 
 const currencyCodes = Object.entries(supportedCurrencies.fiats).map(([, currency]) => currency.currency_code);
 
-export default function ConverterForm() {
+interface ConverterFormProps {
+  amount?: number,
+  from?: string,
+  to?: string
+}
+
+export default function ConverterForm({amount, from, to}: ConverterFormProps) {
   return (
     <form className={tw``} action="/convert">
       <div className={tw`flex`}>
@@ -15,7 +21,7 @@ export default function ConverterForm() {
           </label>
           <input
             className={tw`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            id="amount" name="amount" type="number" placeholder="0.0" value="0" required/>
+            id="amount" name="amount" type="number" placeholder="0.0" value={amount || 0} required/>
         </div>
         <div className={tw`mb-6 px-1`}>
           <label className={tw`block text-gray-700 text-sm font-bold mb-2`} htmlFor="from">
@@ -25,7 +31,7 @@ export default function ConverterForm() {
             className={tw`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             id="from"
             name="from">
-            {currencyCodes.map((currency) => <option key={currency} selected={currency === 'USD'} value={currency}>{currency}</option>)}
+            {currencyCodes.map((currency) => <option key={currency} selected={from ? from === currency : currency === 'USD'} value={currency}>{currency}</option>)}
           </select>
         </div>
         <div className={tw`mb-6 px-1`}>
@@ -36,7 +42,7 @@ export default function ConverterForm() {
             className={tw`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             id="to"
             name="to">
-            {currencyCodes.map((currency) => <option key={currency} selected={currency === 'EUR'} value={currency}>{currency}</option>)}
+            {currencyCodes.map((currency) => <option key={currency} selected={to ? to === currency : currency === 'EUR'} value={currency}>{currency}</option>)}
           </select>
         </div>
       </div>
