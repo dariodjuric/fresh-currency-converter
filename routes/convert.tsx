@@ -1,6 +1,3 @@
-/** @jsx h */
-import { h } from 'preact';
-import { tw } from '@twind';
 import CurrencyConverterForm from '../islands/ConverterForm.tsx';
 
 import { Handlers, PageProps } from '$fresh/server.ts';
@@ -28,12 +25,12 @@ export const handler: Handlers<Data> = {
 
 export default function Convert({ data }: PageProps<Data>) {
   return (
-    <main className={tw`flex justify-center items-center h-screen`}>
-      <div className={tw`p-4 max-w-screen-md bg-white shadow-md rounded px-8 pt-6 pb-6`}>
+    <main className="flex justify-center items-center h-screen">
+      <div className="p-4 max-w-screen-md bg-white shadow-md rounded px-8 pt-6 pb-6">
         <CurrencyConverterForm amount={data.amount} from={data.from} to={data.to}></CurrencyConverterForm>
-        <div className={tw`font-medium`}>
-          <span className={tw`text-slate-200`}>{data.amount} {data.from} = </span><br/>
-          <span className={tw`text-2xl`}>{data.convertedAmount.toFixed(2)} {data.to}</span>
+        <div className="font-medium">
+          <span className="text-slate-200">{data.amount} {data.from} = </span><br/>
+          <span className="text-2xl">{data.convertedAmount.toFixed(2)} {data.to}</span>
         </div>
       </div>
     </main>
