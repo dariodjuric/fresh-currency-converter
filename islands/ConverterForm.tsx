@@ -11,15 +11,22 @@ interface ConverterFormProps {
   to?: string
 }
 
-export default function ConverterForm({amount, from, to}: ConverterFormProps) {
+export default function ConverterForm({ amount, from, to }: ConverterFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    amount,
+    from,
+    to,
+  });
 
   return (
     <form className="" action="/convert" onSubmit={() => setSubmitted(true)}>
       <div className="flex">
-        <AmountInput value={amount}></AmountInput>
-        <CurrencySelect currencies={currencyCodes} defaultCurrency="USD" name="from" selectedCurrency={from} label="From"></CurrencySelect>
-        <CurrencySelect currencies={currencyCodes} defaultCurrency="EUR" name="to" selectedCurrency={to} label="To"></CurrencySelect>
+        <AmountInput value={form.amount} onChange={(amount) => setForm({ ...form, amount })}></AmountInput>
+        <CurrencySelect currencies={currencyCodes} defaultCurrency="USD" name="from" selectedCurrency={form.from}
+                        label="From" onChange={(from) => setForm({ ...form, from })}></CurrencySelect>
+        <CurrencySelect currencies={currencyCodes} defaultCurrency="EUR" name="to" selectedCurrency={form.to} label="To"
+                        onChange={(to) => setForm({ ...form, to })}></CurrencySelect>
       </div>
       <div className="flex items-center justify-center px-2">
         <button
