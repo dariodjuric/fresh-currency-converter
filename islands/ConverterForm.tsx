@@ -2,6 +2,7 @@
 import { h } from 'preact';
 import { tw } from '@twind';
 import supportedCurrencies from '../supported-currencies.json' assert { type: 'json' };
+import { useState } from 'https://esm.sh/stable/preact@10.10.0/deno/hooks.js';
 
 const currencyCodes = Object.entries(supportedCurrencies.fiats).map(([, currency]) => currency.currency_code);
 
@@ -12,8 +13,10 @@ interface ConverterFormProps {
 }
 
 export default function ConverterForm({amount, from, to}: ConverterFormProps) {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
-    <form className={tw``} action="/convert">
+    <form className={tw``} action="/convert" onSubmit={() => setSubmitted(true)}>
       <div className={tw`flex`}>
         <div className={tw`mb-4 px-1`}>
           <label className={tw`block text-gray-700 text-sm font-bold mb-2`} htmlFor="amount">
@@ -50,7 +53,7 @@ export default function ConverterForm({amount, from, to}: ConverterFormProps) {
         <button
           className={tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           type="submit">
-          Convert
+          {submitted ? 'Converting...' : 'Convert'}
         </button>
       </div>
     </form>
