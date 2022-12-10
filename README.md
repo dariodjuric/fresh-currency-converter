@@ -1,6 +1,8 @@
 # Fresh Currency Converter
 
-This is a currency converter app built using the Fresh framework as a demo of the framework's capabilities. The app is running on https://fresh-currency-converter.deno.dev/.
+This is a currency converter app built using the Fresh framework as a demo of
+the framework's capabilities. The app is running on
+https://fresh-currency-converter.deno.dev/.
 
 ## Usage
 

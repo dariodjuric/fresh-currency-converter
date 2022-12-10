@@ -1,4 +1,4 @@
-import CurrencyConverterForm from '../islands/ConverterForm.tsx';
+import CurrencyConverterForm from "../islands/ConverterForm.tsx";
 
 export default function Home() {
   return (
